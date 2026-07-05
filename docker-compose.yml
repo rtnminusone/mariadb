@@ -1,0 +1,21 @@
+services:
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb-database
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    env_file:
+      - ./config/.env
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./config/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    networks:
+      - mariadb-network
+
+networks:
+  mariadb-network:
+    external: true
