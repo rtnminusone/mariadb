@@ -30,7 +30,7 @@ jobs:
             git pull
 
             # 2) 컨테이너 전체 재시작
-            docker compose up -d --remove-orphans
+            docker compose up -d
 
             # 3) 구버전 이미지 찌꺼기 청소
             docker image prune -f
