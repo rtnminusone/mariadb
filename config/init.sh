@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-# 도커 환경변수에서 가져온 루트 비번으로 마리아디비 명령 실행
-mariadb -u root -p"${MARIADB_ROOT_PASSWORD}" <<EOF
+# 마리아디비 명령 실행
+mariadb -u root <<EOF
 
 -- 1. SSUACE프로젝트 전용 DB 및 유저 생성
 CREATE DATABASE IF NOT EXISTS ${SSUACE_DB};
