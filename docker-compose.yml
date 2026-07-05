@@ -5,7 +5,7 @@ services:
     container_name: mariadb-database
     restart: always
     ports:
-      - "3306:3306"
+      - "53306:3306"
     env_file:
       - ./config/.env
     volumes:
