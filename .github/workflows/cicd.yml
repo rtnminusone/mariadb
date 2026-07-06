@@ -3,10 +3,10 @@ name: mariadb
 on:
   push:
     branches:
-      - main  # 💡 실제 배포 브랜치명으로 맞추세요
+      - main
 
 jobs:
-  # 서버 원격 접속 및 실시간 배포
+  # ssh connection and deploy
   deploy:
     runs-on: ubuntu-latest
 
@@ -21,19 +21,19 @@ jobs:
       - name: Deploy via SSH Command
         run: |
           ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-            echo "🍏 서버 접속 완벽 성공! 전체 서비스 배포를 시작합니다."
+            echo "ssh connection success"
 
-            # 최상단 도커 컴포즈 파일이 있는 서버 경로로 이동
+            # cd project path
             cd ${{ secrets.SERVER_PATH }}
 
-            # 1) 새 코드 다운로드
+            # renew project code
             git pull
 
-            # 2) 컨테이너 전체 재시작
+            # restart compose container
             docker compose up -d
 
-            # 3) 구버전 이미지 찌꺼기 청소
+            # delete old images
             docker image prune -f
 
-            echo "🍎 모든 서비스 배포 완료"
+            echo "deploy complete"
           EOF
