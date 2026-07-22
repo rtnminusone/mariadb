@@ -4,6 +4,7 @@ services:
     image: mariadb:10.11
     container_name: mariadb-database
     restart: always
+    command: --default-time-zone=+00:00
     ports:
       - "53306:3306"
     env_file:
